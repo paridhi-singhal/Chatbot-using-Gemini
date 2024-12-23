@@ -1,15 +1,14 @@
 import os
 import json
-
+import streamlit as st
 import google.generativeai as genai
 
-working_dir = os.path.dirname(os.path.abspath(__file__))
-config_file_path = f"{working_dir}/config.json"
-config_data = json.load(open(config_file_path))
 
-GOOGLE_API_KEY = config_data["GOOGLE_API_KEY"]
+gemini_api_key = st.secrets["api_key"]
+os.environ["GEMINI_API_KEY"] = gemini_api_key
 
-genai.configure(api_key=GOOGLE_API_KEY)
+
+genai.configure(api_key=gemini_api_key)
 
 
 def load_model():
